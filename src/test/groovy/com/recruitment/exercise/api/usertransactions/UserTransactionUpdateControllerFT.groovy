@@ -4,15 +4,11 @@ import com.recruitment.exercise.ApplicationBaseFT
 import com.recruitment.exercise.infrastructure.users.UserEntity
 import com.recruitment.exercise.infrastructure.usertransactions.UserTransactionEntity
 
-import static com.recruitment.exercise.api.usertransactions.UserTransactionCreateRequestDtoFaker.getCREATE_REQUEST
-import static com.recruitment.exercise.api.usertransactions.UserTransactionCreateRequestDtoFaker.getCREATE_REQUEST
-import static com.recruitment.exercise.api.usertransactions.UserTransactionCreateRequestDtoFaker.getCREATE_REQUEST
 import static com.recruitment.exercise.api.usertransactions.UserTransactionUpdateRequestDtoFaker.*
 import static com.recruitment.exercise.infrastructure.user.UserEntityFaker.EXISTING_USER
 import static com.recruitment.exercise.infrastructure.usertransactions.UserTransactionEntityFaker.getUSER_TRANSACTION_1
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.MediaType.APPLICATION_JSON
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 
 class UserTransactionUpdateControllerFT extends ApplicationBaseFT {
@@ -54,5 +50,38 @@ class UserTransactionUpdateControllerFT extends ApplicationBaseFT {
 
         then:
         response.status == 464
+    }
+
+    def 'should return status 460 when login null'() {
+        when:
+        def response = mockMvc.perform(put("/user-transactions/${Long.MAX_VALUE}")
+                .content(objectMapper.writeValueAsString(UPDATE_REQUEST_WITH_NULL))
+                .contentType(APPLICATION_JSON))
+                .andReturn().response
+
+        then:
+        response.status == 460
+    }
+
+    def 'should return status 460 when amount negative number'() {
+        when:
+        def response = mockMvc.perform(put("/user-transactions/${Long.MAX_VALUE}")
+                .content(objectMapper.writeValueAsString(UPDATE_REQUEST_AMOUNT_NOT_POSITIVE))
+                .contentType(APPLICATION_JSON))
+                .andReturn().response
+
+        then:
+        response.status == 460
+    }
+
+    def 'should return status 460 when amount scale more than 2'() {
+        when:
+        def response = mockMvc.perform(put("/user-transactions/${Long.MAX_VALUE}")
+                .content(objectMapper.writeValueAsString(UPDATE_REQUEST_AMOUNT_PRECISION_INCORRECT))
+                .contentType(APPLICATION_JSON))
+                .andReturn().response
+
+        then:
+        response.status == 460
     }
 }

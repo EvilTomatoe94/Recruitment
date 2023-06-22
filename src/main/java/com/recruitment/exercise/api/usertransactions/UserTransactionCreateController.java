@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 import static com.recruitment.exercise.domain.exceptions.RC.OK;
 
 @RestController
@@ -20,7 +22,7 @@ public class UserTransactionCreateController {
     @ApiResponses({
             @ApiResponse(code = OK, message = "Success")
     })
-    public UserTransactionResponseDto createUserTransaction(@RequestBody UserTransactionCreateRequestDto requestDto) {
+    public UserTransactionResponseDto createUserTransaction(@RequestBody @Valid UserTransactionCreateRequestDto requestDto) {
         return userTransactionCreateHandler.handleCreateUserTransaction(requestDto);
     }
 }

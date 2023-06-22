@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 import static com.recruitment.exercise.domain.exceptions.RC.OK;
 import static com.recruitment.exercise.domain.exceptions.RC.RESOURCE_NOT_FOUND;
 
@@ -24,7 +26,7 @@ public class UserTransactionUpdateController {
             @ApiResponse(code = OK, message = "Success"),
             @ApiResponse(code = RESOURCE_NOT_FOUND, message = "When transaction does not exist (USER_TRANSACTION_NOT_FOUND)")
     })
-    public UserTransactionResponseDto updateUserTransaction(@PathVariable Long id, @RequestBody UserTransactionUpdateRequestDto requestDto) {
+    public UserTransactionResponseDto updateUserTransaction(@PathVariable Long id, @RequestBody @Valid UserTransactionUpdateRequestDto requestDto) {
         return userTransactionUpdateHandler.handleUserTransactionUpdate(id, requestDto);
     }
 }
