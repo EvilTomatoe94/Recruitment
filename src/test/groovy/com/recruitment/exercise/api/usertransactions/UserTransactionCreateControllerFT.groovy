@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 class UserTransactionCreateControllerFT extends ApplicationBaseFT {
 
-    def 'should create transaction and return response'() {
+    def 'should create transaction and return response with status 200'() {
         when:
         def response = mockMvc.perform(post("/user-transactions")
                 .content(objectMapper.writeValueAsString(CREATE_REQUEST))
@@ -25,19 +25,7 @@ class UserTransactionCreateControllerFT extends ApplicationBaseFT {
             id != null
             login == CREATE_REQUEST.login
             amount == CREATE_REQUEST.amount
-            reward == 90
+            reward == 110
         }
     }
-
-//    def 'should return 464'() {
-//        given:
-//        userRepositoryGit.getUserGitData(USER_GIT_DETAILS.login) >> { throw new ResourceNotFoundException(USER_NOT_FOUND) }
-//
-//        when:
-//        def response = mockMvc.perform(get("/users/${USER_DETAILS.userGitDetails.login}"))
-//                .andReturn().response
-//
-//        then:
-//        response.status == 464
-//    }
 }

@@ -1,9 +1,11 @@
 package com.recruitment.exercise
 
 import com.recruitment.exercise.domain.users.UserApplicationService
+import com.recruitment.exercise.domain.usertransaction.UserTransactionApplicationService
 import com.recruitment.exercise.infrastructure.users.UserJpaRepository
 import com.recruitment.exercise.infrastructure.users.UserRepositoryDb
-
+import com.recruitment.exercise.infrastructure.usertransactions.UserTransactionJpaRepository
+import com.recruitment.exercise.infrastructure.usertransactions.UserTransactionRepositoryDb
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -34,4 +36,13 @@ class ApplicationBaseIT extends Specification {
 
     @Autowired
     TransactionTemplate transactionTemplate
+
+    @Autowired
+    UserTransactionApplicationService userTransactionApplicationService
+
+    @Autowired
+    UserTransactionJpaRepository userTransactionJpaRepository
+
+    @Autowired
+    UserTransactionRepositoryDb userTransactionRepositoryDb
 }

@@ -14,10 +14,8 @@ import static com.recruitment.exercise.domain.exceptions.RC.OK;
 @RequestMapping("user-transactions")
 @Api(tags = "User transactions")
 public class UserTransactionCreateController {
-
     private final UserTransactionCreateHandler userTransactionCreateHandler;
-
-    @PostMapping(value = "/")
+    @PostMapping
     @ApiOperation(value = "Create transaction for a user")
     @ApiResponses({
             @ApiResponse(code = OK, message = "Success")

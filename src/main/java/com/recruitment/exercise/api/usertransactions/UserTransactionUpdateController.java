@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import static com.recruitment.exercise.domain.exceptions.RC.OK;
+import static com.recruitment.exercise.domain.exceptions.RC.RESOURCE_NOT_FOUND;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,11 +18,11 @@ public class UserTransactionUpdateController {
 
     private final UserTransactionUpdateHandler userTransactionUpdateHandler;
 
-    // Dać zwrotkę
-    @PutMapping(value = "/{id}", produces = {"application/app-v1.0+json"})
+    @PutMapping("/{id}")
     @ApiOperation(value = "Update transaction")
     @ApiResponses({
-            @ApiResponse(code = OK, message = "Success")
+            @ApiResponse(code = OK, message = "Success"),
+            @ApiResponse(code = RESOURCE_NOT_FOUND, message = "When transaction does not exist (USER_TRANSACTION_NOT_FOUND)")
     })
     public UserTransactionResponseDto updateUserTransaction(@PathVariable Long id, @RequestBody UserTransactionUpdateRequestDto requestDto) {
         return userTransactionUpdateHandler.handleUserTransactionUpdate(id, requestDto);

@@ -26,7 +26,6 @@ public class UserTransactionRepositoryDb implements UserTransactionRepository {
 
     private final UserTransactionJpaRepository userTransactionJpaRepository;
 
-    // todo commanda tu dać
     @Override
     public UserTransaction createUserTransaction(BigDecimal amount, User user, int reward) {
         UserTransactionEntity userTransaction = userTransactionJpaRepository.save(create(

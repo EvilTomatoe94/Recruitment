@@ -6,14 +6,14 @@ import com.recruitment.exercise.domain.users.User
 import com.recruitment.exercise.infrastructure.users.UserEntity
 
 import static com.recruitment.exercise.infrastructure.user.UserEntityFaker.NON_EXISTING_USER
-import static com.recruitment.exercise.infrastructure.user.UserEntityFaker.getEXISTING_USER
+import static com.recruitment.exercise.infrastructure.user.UserEntityFaker.EXISTING_USER
 
 
 class UserRepositoryDbIT extends ApplicationBaseIT {
 
     def 'should create new user'() {
         when:
-        User user = userRepositoryDb.getOrCreateUser("kamila.w2")
+        User user = userRepositoryDb.getOrCreateUser(NON_EXISTING_USER.login)
 
         then:
         Optional<UserEntity> savedUser = userJpaRepository.findByLogin(user.login)
@@ -59,7 +59,7 @@ class UserRepositoryDbIT extends ApplicationBaseIT {
 
     def 'should throw ResourceNotFoundException'() {
         when:
-        User user = userRepositoryDb.getUser(NON_EXISTING_USER.login)
+        userRepositoryDb.getUser(NON_EXISTING_USER.login)
 
         then:
         thrown(ResourceNotFoundException)

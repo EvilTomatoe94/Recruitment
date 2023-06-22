@@ -27,6 +27,7 @@ public class RestControllerErrorHandler {
         response.setStatus(exception.getErrorCode());
         ResourceNotFoundExceptionResponseDto dto = new ResourceNotFoundExceptionResponseDto(exception.getMsgKey(), exception.getErrorCode());
         request.setAttribute(ResourceNotFoundExceptionResponseDto.class.getName(), dto);
+        log.error("ResourceNotFoundException of type {}", exception.getMsgKey().name());
         return dto;
     }
 }
