@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/ddl/001-create-table-users.yaml
+  - include:
+      file: db/ddl/002-create-table-user-transactions.yaml

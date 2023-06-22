@@ -1,0 +1,4 @@
+app:
+  git:
+    user:
+      url: https://api.github.com/users
